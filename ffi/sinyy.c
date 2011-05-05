@@ -1,6 +1,5 @@
-#include <math.h>
-
 double sinyy (double d) {
-	return sin(d);
+	double (*y)(double) = 0x0;
+	return y(d);
 }
 

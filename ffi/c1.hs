@@ -4,11 +4,10 @@ module Main where
 
 import Foreign.C
 
-foreign import ccall "sinyy" c_sinOK :: CDouble -> IO CDouble
-foreign import ccall "sinyy" c_sinBad :: CDouble -> CDouble
+foreign import ccall "sinyy" c_sin :: CDouble -> CDouble
 
 sinx :: Double -> Double
-sinx d = realToFrac $ c_sinBad $ realToFrac d
+sinx d = realToFrac $ c_sin $ realToFrac d
 
 x :: Double
 x = 0.8932
