@@ -1,0 +1,11 @@
+GHC's RULES pragma allow for specialized instances of methods to be created.
+Essentially allows for selective function overloading. The RULES can be defined
+'anywhere' in the module graph and can therefore change behaviour of other
+code. E.g so attacker adds a rule that changes the behaviour of one of our
+functions...
+
+results
+-------
+Unsafe!
+
+

@@ -1,0 +1,9 @@
+Template Haskell allows us to see into abstract data types.
+So in the example the data type A is exported without any
+constructors but using TH we are able to create values of
+type A.
+
+results
+-------
+Unsafe!
+

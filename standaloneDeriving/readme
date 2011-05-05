@@ -1,0 +1,12 @@
+The idea is to use standalone deriving to add some
+instances such as Show and Read that will allow
+you to read/synthasize constructors you aren't
+able to import.
+
+results
+-------
+
+Don't seem to be able to define instances for data
+types that haven't exported all their constructors.
+So I guess we are OK?
+

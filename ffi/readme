@@ -1,0 +1,10 @@
+GHC allows for FFI imported functions to be pure. However
+this guarantee of the behaviour of the function is provided
+by the user, not GHC.
+
+results
+-------
+
+Unsafe.
+
+

@@ -1,0 +1,27 @@
+Newtype deriving is broken in that it allows otherwise undefinable functions to
+be defined. It allows casting between say 'm Int' to 'm t' where t is a newtype
+such that t ~ Int. This can break type safety allowing a type of 'm t' to be
+passed to a function that expects 'm Int' or visa-versa. When combined with
+things like GADTs and type families that allow type level programming (so a
+type 'm Int' may have a completely different concrete representation than 'm t'
+[e.g 'm Int' doesn't actually need to involve 'Int' values]) we have a problem.
+
+I haven't been able to find a really nice example of module boundaries being
+broken (the most obvious case of security problems). But do have lots of cases
+of how it is currently unsound and breaks the Haskell type system. This is
+enough evidence but not the most compelling.
+
+Wait, Y_Main, Y1 sort of does. Y1 exposes a set API that should only allow a
+list of elements above a certain minimum initial element. Using newtype
+deriving we can define an isomorphic type to Int but redefine Ord so its
+reversed.  This would be fine since the types are different but we can also use
+new type deriving to convert between Int and the newtype so after the list has
+been created we use this to convert the min list of newtypes to a list of
+Int's. This list of Int's breaks the invariants of the list which shouldn't be
+possible with exposed API.
+
+results
+-------
+
+Unsafe!
+

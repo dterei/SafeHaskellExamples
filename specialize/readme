@@ -1,0 +1,10 @@
+GHC's SPECIALIZE pragma allows for specialized instances of functions to be
+created. An OBSOLETE usage of this allowed the user to specify what function
+should be used as the specialized instance. This has since been superseded
+by RULES. However must test the old behaviour isn't accepted any more.
+
+results
+-------
+Safe! (old behaviour invalid now)
+
+

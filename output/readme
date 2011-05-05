@@ -1,0 +1,10 @@
+The idea is to use the output redirection flags to cause
+problems at compile time. For example by overwritting
+files with output, even replacing a system command.
+
+results
+-------
+
+Only works when ghc is in one-shot mode (-c). In
+(--make) these options are ignored.
+

@@ -1,0 +1,12 @@
+The idea is to use typeable to perform unsafe
+casts between types.
+
+results
+-------
+
+ - Since Typeable only operates on types (and ignores values/constructors)
+   we can define a standalone deriving instances for Typeable even when we
+   don't have access to all the constructors for the type.
+ - We can still restrict access to the class method, 'typeOf'.
+
+
