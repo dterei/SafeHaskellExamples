@@ -1,0 +1,8 @@
+The big mama! Allows side-effecting functions to pretend to be
+pure. Escape from IO.
+
+results
+-------
+
+very unsafe
+
