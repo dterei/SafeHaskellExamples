@@ -1,0 +1,18 @@
+Name: p
+Version: 1.0
+Description: SafeHaskell Test Package
+License: BSD3
+Author: David Terei
+Maintainer: davidterei@gmail.com
+Build-Type: Simple
+Cabal-Version: >= 1.2
+
+Library {
+    Build-Depends: base >= 4
+    Exposed-Modules:
+        M_Terei
+        M_Terei2
+        M_Terei3
+        M_Terei4
+}
+
