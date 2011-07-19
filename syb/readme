@@ -1,0 +1,13 @@
+a) The idea is to use the typeable interface to
+create coercions between type that we shouldn't.
+
+b) Also want to test that if you can only derive
+instances, not hand craft them, are we safe?
+
+results
+-------
+
+a) Unsafe!
+
+b) Seems so.
+
