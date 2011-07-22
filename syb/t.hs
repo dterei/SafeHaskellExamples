@@ -1,4 +1,5 @@
 {-# LANGUAGE DeriveDataTypeable, StandaloneDeriving #-}
+{-# LANGUAGE Safe #-}
 module Main where
 
 import G
@@ -13,6 +14,12 @@ instance Typeable G where
 
 instance Typeable P where
     typeOf _ = typeOf (undefined :: G)
+
+{-
+deriving instance Typeable G
+
+deriving instance Typeable P
+-}
 
 main = do
     let h = H "Hello World"

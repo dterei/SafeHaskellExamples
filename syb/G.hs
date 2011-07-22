@@ -1,3 +1,4 @@
+{-# LANGUAGE Safe #-}
 module G (IsoInt, h, showH, P, p, showP) where
 
 newtype IsoInt = I Int
@@ -15,5 +16,5 @@ p :: P
 p = P 3
 
 showP :: P -> String
-showP (P n) = show n
+showP (P n) = "Should be 3 := " ++ show n
 
