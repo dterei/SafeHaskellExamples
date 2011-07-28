@@ -1,11 +1,13 @@
 {-# LANGUAGE DefaultSignatures #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE FlexibleContexts #-}
-module GenBin (Bin(..), Cerial(..)) where
+module GenBin (Bin(..), Cerial(..), Private) where
 
 import GHC.Generics
 import Data.Bits
 import Data.Char
+
+data Private a = Private a
 
 -- | Binary data encoding
 data Bin = O | I deriving (Show, Eq)
