@@ -1,0 +1,13 @@
+The idea is to use Generic deriving to get a
+serilization of a data type and use that to
+inspect and potentially construct values of
+private types.
+
+results
+-------
+
+Don't seem to be able to define instances for data
+types that haven't exported all their constructors.
+So I guess we are OK? (i.e same result as stand
+alone deriving)
+
