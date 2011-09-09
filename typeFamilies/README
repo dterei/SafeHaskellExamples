@@ -1,0 +1,66 @@
+David M
+--------------------------------------------------------------------
+It might be a little premature to be thinking about this, but in the
+long term, our big picture involves some big server farm running a
+Haskell web server that incorporates untrusted app code written in
+SafeHaskell and uploaded by users.  When app authors upload an app,
+there's probably a server that compiles it and pushes it out to all
+the other servers (or makes it available via some network file
+system).  Finally, the front-end web servers will likely load
+applications dynamically on demand, since users might be constantly
+uploading and modifying their apps.
+
+Though we haven't put much thought into it, it would be nice if
+dynamic loading weren't inherently incompatible with SafeHaskell.
+However, the combination of dynamic loading and TypeFamilies seems
+really dangerous, since you need to guarantee no overlapping
+instances.
+
+I've appended to this message a tiny 4-module program that is illegal
+if compiled as a single program because it has overlapping data/type
+family declarations.  The Simons can probably already guess what I've
+done:  There's module A defining data instance Fam () = FamA Int,
+while module B defines data instance Fam () = FamB String.  Obviously
+the program fails to compile if modules A and B are both included,
+even if nothing from these modules is ever invoked, because
+overlapping data instances are so dangerous.
+
+But suppose we use dynamic linking of Module A and/or B, and all we
+get from them is the Dynamic symbol a or b.  If we can invoke the
+underlying function, then we undermine type safety, because
+
+       typeOf (undefined :: FamHolder ())
+
+is going to have only one value, while Fam () actually has two
+different types.  Thus, if A and B are two separate modules belonging
+to two colluding malicious apps, we are in trouble.
+
+Now we could possibly work around this issue by checking the .hi files
+before we load code.  (Does GHC's dynCompileExpr do anything like
+this?)  But this is not entirely satisfactory either, because if there
+is an overlapping instance, it's not clear whose fault it is.  If
+someone uploads a working app that exports a data family, we don't
+want another malicious app to break the first one just because it
+happens to have been loaded first on some particular front-end server.
+
+Another solution is to ensure that apps cannot import or export
+data/type family declarations.  This isn't that hard to enforce right
+now, because the system libraries by-and-large don't use this
+extension, so we could mark any packages that export such families as
+untrusted.  (For --safecompile, it might be nice to enforce this when
+building a library but not an app.)  But this feels very awkward and
+error prone--we are saying that data families themselves aren't unsafe
+when created by untrusted code, but they are dangerous when imported
+and extended by untrusted code.
+
+Is it worth adding some rule like Safe code can only define instances
+of data/type families declared in the same package (or, more
+conservatively, the same module)?
+
+Since this safety issue is more general than just safe Haskell, has
+there been any thought about how TypeFamilies might interact with
+dynamic loading?
+
+Thanks,
+David
+
