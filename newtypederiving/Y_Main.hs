@@ -21,6 +21,9 @@ newtype Down a = Down a deriving (Eq, Show, IntIso)
 instance Ord a => Ord (Down a) where
     compare (Down a) (Down b) = compare b a
 
+instance Ord Int where
+    compare a b = False
+
 forceInt :: MinList Int -> MinList Int
 forceInt = id
 

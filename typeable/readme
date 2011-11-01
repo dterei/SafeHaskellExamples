@@ -9,4 +9,3 @@ results
    don't have access to all the constructors for the type.
  - We can still restrict access to the class method, 'typeOf'.
 
-
