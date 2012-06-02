@@ -123,3 +123,37 @@ probably fairly controlled (e.g some logging output). But in general
 be very careful about defining such instances as it will be hard to
 ensure that untrusted code doesn't get access to them...
 
+## Trickiness
+
+What about an unsafe type class, but it's used in a module and only
+safe functions built on top of the unsafe type class functions are
+exported? However the functions on top of the unsafe typeclass assume
+that instances of the type class while unsafe meet certain conditions
+and they rely on this to ensure they themselves are safe...
+
+Controlling access to a typeclass function is easy though, it works
+just like a normal function. So in your example, the Safe module
+wouldn't necessarily become unsafe but there is some unsatisfactory
+trickiness.
+
+- untrusted code still couldn't access the type class as the
+  functions for it aren't exported.
+- the derived functions may or may not be safe anymore depending on
+  polymorphism:
+- If the derived functions don't have any polymorphism that would
+  allow consumers of the functions to choose what underlying typeclass
+  is used, then the module is still safe.
+- If they do, then yes untrusted code could choose what types to
+  use to cause the unsafe instance to be used, thus making the derived
+  functions unsafe. (This assumes the untrusted code has access to the
+  unsafe instance but as I said, this is hard to reason about since
+  instances are somewhat global).
+
+There are solutions to this problem but its a tricky situation with
+the solutions really being to be careful... I don't know how we could
+do better. Tracking safety at the symbol level doesn't seem like it
+would change this situation. Basically you want closed type classes or
+a way to control what instances can be used (maybe by simply making
+instances part of import/export lists) both of which are big changes
+to Haskell.
+
