@@ -16,25 +16,19 @@ class IntIso t where
 instance IntIso Int where
     intIso = id
 
-newtype Down a = Down a deriving (Eq, Show, IntIso)
+newtype I = I Int deriving (Eq, IntIso)
 
-instance Ord a => Ord (Down a) where
-    compare (Down a) (Down b) = compare b a
-
-instance Ord Int where
-    compare a b = False
-
-forceInt :: MinList Int -> MinList Int
-forceInt = id
+instance Ord I where
+    compare (I a) (I b) = compare b a
 
 a1, a2 :: MinList Int
 a1 = foldl insertMinList (newMinList $ head nums) (tail nums)
-a2 = forceInt $ intIso $ foldl (\x y -> insertMinList x $ Down y) (newMinList $ Down $ head nums) (tail nums)
+a2 = intIso $ foldl (\x y -> insertMinList x $ I y) (newMinList $ I $ head nums) (tail nums)
 
 nums :: [Int]
-nums = [1,4,0,1,-5,2,3,5,-1,2,0,0,-4,-3,9]
+nums = [1,4,0,1,-5,2,3]
 
 main = do
-    printIntMinList a1
-    printIntMinList a2
+    print a1
+    print a2
 

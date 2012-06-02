@@ -1,4 +1,4 @@
-module A ( A ) where
+module A ( A() ) where
 
 data A = A1 | A2
 

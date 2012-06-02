@@ -6,3 +6,12 @@ results
 
 very unsafe
 
+issues
+------
+
+GHC requires the precautions of:
+
+ * Use {-# NOINLINE foo #-} for correctness (otherwise IO may be duplicated)
+ * Use `-fno-cse` flag (otherwise IO may be combined)
+ * Switch of let floating
+

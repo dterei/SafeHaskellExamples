@@ -1,7 +1,7 @@
 -- {-# OPTIONS_GHC -XSafe #-}
+{-# LANGUAGE TemplateHaskell #-}
 module Main where
 
-{-# FOOOO test #-}
 main = do
     putStrLn "Hello World"
 
