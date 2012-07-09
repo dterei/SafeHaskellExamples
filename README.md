@@ -1,5 +1,4 @@
-Safe Haskell Examples
-=====================
+# Safe Haskell Examples
 
 This repository contains some example programs that generally
 do dangerous things that Safe Haskell is designed to stop.
