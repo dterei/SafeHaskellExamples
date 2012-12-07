@@ -25,3 +25,5 @@ results
 
 Unsafe!
 
+Breaks both module boundaries and type safety.
+

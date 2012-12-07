@@ -1,6 +1,11 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
+{-
+    Creates incosistent System Fc axioms such that we prove
+    Double ~ (Int, Int), leading to a segmentation fault.
+ -}
+
 data family Z :: * -> *
 
 class IsInt t where
