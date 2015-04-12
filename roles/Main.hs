@@ -1,5 +1,4 @@
 {-# LANGUAGE Trustworthy #-}
-{-# OPTIONS_GHC -fwarn-unsafe #-}
 module Main where
 
 import Data.Coerce
@@ -17,6 +16,8 @@ main =
       myints   = coerce ints :: [MyInt]
       myintSet = foldr insertElement newSet myints
       intSet'  = coerce myintSet :: Set Int
+      -- Not allowed unless MkMInt is in scope
+      -- mints    = coerce ints :: [MInt]
   in do
     print intSet
     print myintSet

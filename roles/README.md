@@ -153,3 +153,29 @@ Roles have an ordering, `nominal > representational > phantom`, and annotations
 can only declare a type parameter to be a higher or equal role to the one
 inferred.
 
+### Roles & Safe Haskell
+
+Roles are an unfourtunate mechanism for control right now. Since
+representational is the default role for most type constructors, to enforce
+invariants on abstract data types, library authors need to set their type
+constructors to have nominal roles.
+
+This requires that library authors understand roles to enforce what they expect
+to happen according to Haskell2010 semantics. It also prevents them using
+`coerce` internally and gaining the optimization, which is insulting as they
+can write the code that coerce is semantically equivalent to.
+
+It seems a different approach is needed, of either:
+
+1) Require that all constructors are in scope when calling `coerce`. There is
+some precendence for this as 7.10 requires that a newtype's constructor is in
+scope to use `coerce`.
+
+**NO**: This was requirement wasn't place of data types since some types (like
+`IORef`) don't even have constructors that can be in scope.
+
+2) Allow specifying internal + external role annotations.
+
+3) Change the default to be nominal when all the constructors aren't exported,
+and allow weakening of this to referential with role annotations.
+
