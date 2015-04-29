@@ -11,3 +11,7 @@ Can't figure out how to break. This allows you to create new type aliases to
 existing dictionaries, but it doesn't seem to allow any way to create a new
 dictionary and alias it to an existing type.
 
+Well, look at BadInsert. I can't override existing types and behavior, but I
+can create my own new types that violate invariants. However, is this any
+different from orphan instances?
+
