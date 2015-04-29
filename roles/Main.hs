@@ -1,4 +1,5 @@
 {-# LANGUAGE Trustworthy #-}
+{-# LANGUAGE StandaloneDeriving #-}
 module Main where
 
 import Data.Coerce
@@ -8,6 +9,11 @@ newtype MyInt = MyInt Int deriving (Eq, Show)
 
 instance Ord MyInt where
   (MyInt x) <= (MyInt y) = y <= x
+
+-- class IntIso t where
+--     intIso :: Set t -> Set Int
+--
+-- deriving instance IntIso MInt
 
 main :: IO ()
 main =
