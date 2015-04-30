@@ -10,14 +10,10 @@ module Main where
 
 import MinList
 
-class IntIso t where
-    intIso :: c t -> c Int
-
-instance IntIso Int where
-    intIso = id
+class IntIso t where { intIso :: MinList t -> MinList Int }
+instance IntIso Int where { intIso = id }
 
 newtype Down a = Down a deriving (Eq, IntIso)
-
 instance Ord a => Ord (Down a) where
     compare (Down a) (Down b) = compare b a
 
@@ -27,9 +23,5 @@ fine = foldl (\x y -> insertMinList x $ Down y) (newMinList $ Down 0) [-1,-2,-3,
 unsafeCast :: MinList (Down Int) -> MinList Int
 unsafeCast = intIso
 
-bad :: MinList Int
-bad = unsafeCast fine
-
-main = do
-    printIntMinList bad
+main = print $ unsafeCast fine
 
