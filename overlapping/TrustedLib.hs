@@ -1,5 +1,4 @@
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE Trustworthy #-}
 module TrustedLib where
 
 class Pos a where

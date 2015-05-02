@@ -1,3 +1,4 @@
+{-# LANGUAGE Safe #-}
 module B (ins) where
 
 import Data.Set

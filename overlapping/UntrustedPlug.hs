@@ -1,14 +1,14 @@
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverlappingInstances #-}
-{-# LANGUAGE Safe #-}
 module UntrustedPlug where
 
 import TrustedLib
 
-instance Pos a where
+instance
+  Pos a where
     res _ = False
 
-instance Pos [Int] where
+instance
+  Pos [Int] where
     res _ = error "This curry is poisoned!"
 
 function :: Int
